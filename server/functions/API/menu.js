@@ -1,35 +1,9 @@
-// dummy menu data to serve on test
+// menu API to fetch, create, update and delete menu items
 
-exports.getMenu = (request, response) => {
-  let menuItems = [
-    {
-      id: 1,
-      category: "Starters",
-      items: [
-        {
-          id: 1,
-          name: "Chicken teriyaki",
-          price: 7.5,
-        },
-        {
-          id: 2,
-          name: "Tempura Platter",
-          price: 8,
-        },
-      ],
-    },
-    {
-      id: 2,
-      category: "Noodles",
-      items: [
-        {
-          id: 1,
-          name: "Tonkatsu Ramen",
-          price: 12.5,
-        },
-      ],
-    },
-  ];
+const { db } = require("../utils/admin");
 
-  return response.json(menuItems);
+exports.getMenu = async (request, response) => {
+  const snapShot = await db.collection("menuItems").get();
+  const menuItems = snapShot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  response.json({ menuItems });
 };
