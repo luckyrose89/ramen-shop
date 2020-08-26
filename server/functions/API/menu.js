@@ -5,12 +5,24 @@ const { db } = require("../utils/admin");
 // get all menu items
 exports.getMenu = async (request, response) => {
   try {
-    const snapShot = await db.collection("menu-types").get();
-    const menuItems = snapShot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    return response.json({ menuItems });
+    const menuSnapShot = await db.collection("menu-types").get();
+    const menu = [];
+
+    for (const menuTypeObj of menuSnapShot.docs) {
+      let menuCategory = menuTypeObj.data();
+      menuCategory.id = menuTypeObj.id;
+      menuCategory["items"] = [];
+
+      let menuItemsSnapshot = await menuTypeObj.ref
+        .collection("menu-items")
+        .get();
+      menuItemsSnapshot.forEach((doc) => {
+        menuCategory["items"].push({ id: doc.id, ...doc.data() });
+      });
+      menu.push(menuCategory);
+    }
+
+    response.json({ menu });
   } catch (error) {
     console.log(error);
     return response.status(500).json({ error });
