@@ -29,25 +29,24 @@ exports.getMenu = async (request, response) => {
   }
 };
 
-// // post request to create menu category
-// exports.postCategory = async (request, response) => {
-//   try {
-//     if (request.body.category.trim() === "") {
-//       return response.status(400).json({ category: "must not be empty" });
-//     }
+// post request to create menu category
+exports.postCategory = async (request, response) => {
+  try {
+    if (request.body.category.trim() === "") {
+      return response.status(400).json({ category: "must not be empty" });
+    }
 
-//     const newCategory = {
-//       category: request.body.category,
-//       items: [],
-//     };
+    const newCategory = {
+      id: request.body.category,
+    };
 
-//     const categoryCreated = await db.collection("menuItems").add(newCategory);
-//     return response.json({ categoryCreated });
-//   } catch (error) {
-//     console.log(error);
-//     return response.status(500).json({ error: "something went wrong!" });
-//   }
-// };
+    const categoryCreated = await db.collection("menu-types").add(newCategory);
+    return response.json({ categoryCreated });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ error: "something went wrong!" });
+  }
+};
 
 // // post to create and items to category
 // exports.postItems = async(request, response) => {
