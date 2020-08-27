@@ -33,8 +33,9 @@ exports.postCategory = async (request, response) => {
     if (request.body.category.trim() === "") {
       return response.status(400).json({ category: "must not be empty" });
     }
-    const categoryRef = db.collection("menu-types").doc(request.body.category);
-    const categoryCreated = categoryRef.set({});
+    const categoryCreated = await db.collection("menu-types").add({
+      category: request.body.category,
+    });
     return response.json({ categoryCreated });
   } catch (error) {
     console.log(error);
@@ -42,13 +43,12 @@ exports.postCategory = async (request, response) => {
   }
 };
 
-// post to create and items to category
 exports.postItems = async (request, response) => {
   try {
     const menuItemsRef = db
       .doc(`menu-types/${request.params.categoryId}`)
       .collection("menu-items");
-    const itemCreated = await menuItemsRef.doc(request.body.itemId).set({
+    const itemCreated = await menuItemsRef.add({
       name: request.body.name,
       price: request.body.price,
       imageURL: request.body.imageURL,
@@ -56,6 +56,38 @@ exports.postItems = async (request, response) => {
     });
 
     return response.json({ itemCreated });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ error: "something went wrong!" });
+  }
+};
+
+exports.editCategory = async (request, response) => {
+  try {
+    if (request.body.category.trim() === "") {
+      return response.status(400).json({ category: "must not be empty" });
+    }
+    const categoryRef = db
+      .collection("menu-types")
+      .doc(request.params.categoryId);
+    const editedCategory = await categoryRef.update({
+      category: request.body.category,
+    });
+
+    response.json({ editedCategory });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ error: "something went wrong!" });
+  }
+};
+
+exports.editItem = async (request, response) => {
+  try {
+    const itemRef = db.doc(
+      `menu-types/${request.params.categoryId}/menu-items/${request.params.itemId}`
+    );
+    const editedItem = await itemRef.update(request.body);
+    response.json({ editedItem });
   } catch (error) {
     console.log(error);
     return response.status(500).json({ error: "something went wrong!" });
