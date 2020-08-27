@@ -2,7 +2,6 @@
 
 const { db } = require("../utils/admin");
 
-// get all menu items
 exports.getMenu = async (request, response) => {
   try {
     const menuSnapShot = await db.collection("menu-types").get();
@@ -29,18 +28,13 @@ exports.getMenu = async (request, response) => {
   }
 };
 
-// post request to create menu category
 exports.postCategory = async (request, response) => {
   try {
     if (request.body.category.trim() === "") {
       return response.status(400).json({ category: "must not be empty" });
     }
-
-    const newCategory = {
-      id: request.body.category,
-    };
-
-    const categoryCreated = await db.collection("menu-types").add(newCategory);
+    const categoryRef = db.collection("menu-types").doc(request.body.category);
+    const categoryCreated = categoryRef.set({});
     return response.json({ categoryCreated });
   } catch (error) {
     console.log(error);
@@ -48,11 +42,22 @@ exports.postCategory = async (request, response) => {
   }
 };
 
-// // post to create and items to category
-// exports.postItems = async(request, response) => {
-//   try {
+// post to create and items to category
+exports.postItems = async (request, response) => {
+  try {
+    const menuItemsRef = db
+      .doc(`menu-types/${request.params.categoryId}`)
+      .collection("menu-items");
+    const itemCreated = await menuItemsRef.doc(request.body.itemId).set({
+      name: request.body.name,
+      price: request.body.price,
+      imageURL: request.body.imageURL,
+      description: request.body.description,
+    });
 
-//   }catch(error) {
-
-//   }
-// }
+    return response.json({ itemCreated });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ error: "something went wrong!" });
+  }
+};
