@@ -1,5 +1,9 @@
 const functions = require("firebase-functions");
-const app = require("express")();
+const express = require("express");
+const cors = require("cors");
+const app = express();
+
+app.use(cors({ origin: true }));
 
 const {
   getMenu,
@@ -18,4 +22,5 @@ app.put("/:categoryId", editCategory);
 app.put("/:categoryId/items/:itemId", editItem);
 app.delete("/:categoryId", deleteCategory);
 app.delete("/:categoryId/items/:itemId", deleteItem);
+
 exports.api = functions.https.onRequest(app);

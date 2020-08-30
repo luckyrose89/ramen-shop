@@ -1,4 +1,4 @@
-// menu API to fetch, create, update and delete menu items
+// menu functions to fetch, create, update and delete menu items
 
 const { db } = require("../utils/admin");
 
