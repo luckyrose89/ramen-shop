@@ -93,3 +93,47 @@ exports.editItem = async (request, response) => {
     return response.status(500).json({ error: "something went wrong!" });
   }
 };
+
+exports.deleteCategory = async (request, response) => {
+  try {
+    const categoryRef = db
+      .collection("menu-types")
+      .doc(request.params.categoryId);
+
+    // delete all items in category
+    const menuItemsObj = await categoryRef.collection("menu-items").get();
+
+    const itemRefs = [];
+    menuItemsObj.docs.forEach((doc) => {
+      itemRefs.push(doc.id);
+    });
+
+    for (let i = 0; i < itemRefs.length; i++) {
+      categoryRef.collection("menu-items").doc(itemRefs[i]).delete();
+    }
+
+    // delete category when items are deleted
+    const categoryDeleted = await categoryRef.delete();
+
+    response.json({ categoryDeleted });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ error: "something went wrong!" });
+  }
+};
+
+exports.deleteItem = async (request, response) => {
+  try {
+    const itemRef = db
+      .collection("menu-types")
+      .doc(request.params.categoryId)
+      .collection("menu-items")
+      .doc(request.params.itemId);
+
+    const itemDeleted = await itemRef.delete();
+    response.json({ itemDeleted });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ error: "something went wrong!" });
+  }
+};
