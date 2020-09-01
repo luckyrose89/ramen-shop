@@ -43,6 +43,7 @@ exports.signUpUser = async (request, response) => {
     const user = {
       username: request.body.username,
       email: request.body.email,
+      address: request.body.address,
       password: request.body.password,
       confirmPassword: request.body.confirmPassword,
     };
@@ -66,6 +67,7 @@ exports.signUpUser = async (request, response) => {
     const userDetails = {
       username: user.username,
       email: user.email,
+      address: user.address,
       createdAt: new Date().toISOString(),
       userId,
     };

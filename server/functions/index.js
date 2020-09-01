@@ -5,27 +5,16 @@ const app = express();
 
 app.use(cors({ origin: true }));
 
-const {
-  getMenu,
-  postCategory,
-  postItems,
-  editCategory,
-  editItem,
-  deleteCategory,
-  deleteItem,
-} = require("./API/menu");
+const { getMenu, postItem, editItem, deleteItem } = require("./API/menu");
 
 const { loginUser, signUpUser } = require("./API/users");
 
 // menu item routes
 
 app.get("/", getMenu);
-app.post("/", postCategory);
-app.post("/:categoryId", postItems);
-app.put("/:categoryId", editCategory);
-app.put("/:categoryId/items/:itemId", editItem);
-app.delete("/:categoryId", deleteCategory);
-app.delete("/:categoryId/items/:itemId", deleteItem);
+app.post("/", postItem);
+app.put("/:itemId", editItem);
+app.delete("/:itemId", deleteItem);
 
 // user routes
 app.post("/auth/login", loginUser);
