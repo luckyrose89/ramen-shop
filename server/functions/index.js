@@ -15,7 +15,7 @@ const {
   deleteItem,
 } = require("./API/menu");
 
-const { loginUser } = require("./API/users");
+const { loginUser, signUpUser } = require("./API/users");
 
 // menu item routes
 
@@ -29,5 +29,6 @@ app.delete("/:categoryId/items/:itemId", deleteItem);
 
 // user routes
 app.post("/auth/login", loginUser);
+app.post("/auth/signup", signUpUser);
 
 exports.api = functions.https.onRequest(app);
