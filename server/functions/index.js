@@ -7,7 +7,7 @@ app.use(cors({ origin: true }));
 
 const { getMenu, postItem, editItem, deleteItem } = require("./API/menu");
 
-const { loginUser, signUpUser } = require("./API/users");
+const { loginUser, signUpUser, getUserInfo } = require("./API/users");
 
 // menu item routes
 
@@ -19,5 +19,6 @@ app.delete("/:itemId", deleteItem);
 // user routes
 app.post("/auth/login", loginUser);
 app.post("/auth/signup", signUpUser);
+app.get("/auth/user", getUserInfo);
 
 exports.api = functions.https.onRequest(app);

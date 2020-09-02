@@ -84,3 +84,8 @@ exports.signUpUser = async (request, response) => {
       .json({ general: "Error during signup, please try again!" });
   }
 };
+
+exports.getUserInfo = async (request, response) => {
+  try {
+  } catch (error) {}
+};
