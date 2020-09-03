@@ -6,14 +6,12 @@ module.exports = async (request, response, next) => {
   let idToken;
   if (
     request.headers.authorization &&
-    request.authorization.headers.startsWith("Bearer ")
+    request.headers.authorization.startsWith("Bearer ")
   ) {
     idToken = request.headers.authorization.split("Bearer ")[1];
   } else {
-    console.log("No token found!");
-    return response
-      .status(403)
-      .json({ error: "User not authorized for access" });
+    console.error("No token found");
+    return response.status(403).json({ error: "Unauthorized" });
   }
 
   try {
@@ -27,6 +25,7 @@ module.exports = async (request, response, next) => {
     request.user.username = userData.docs[0].data().username;
     request.user.email = userData.docs[0].data().email;
     request.user.address = userData.docs[0].data().address;
+    console.log(request.user);
     return next();
   } catch (error) {
     console.log("An error occurred while verifying your token", error);
