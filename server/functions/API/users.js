@@ -84,3 +84,26 @@ exports.signUpUser = async (request, response) => {
       .json({ general: "Error during signup, please try again!" });
   }
 };
+
+exports.getUserInfo = async (request, response) => {
+  try {
+    let userData = {};
+    const docRef = await db.doc(`/users/${request.user.username}`).get();
+    console.log(docRef);
+    if (docRef.exists) {
+      userData.userCredentials = docRef.data();
+      return response.json(userData);
+    }
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ error: "Something went wrong!" });
+  }
+};
+
+// exports.getOrderHistory = async(request, response) => {
+
+// }
+
+// exports.postToOrderHistory = async(request, response) => {
+
+// }
