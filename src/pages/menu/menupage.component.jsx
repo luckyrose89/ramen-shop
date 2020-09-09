@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Category from "../../components/category/category.component";
 
 class MenuPage extends React.Component {
   constructor(props) {
@@ -23,13 +24,29 @@ class MenuPage extends React.Component {
     }
   };
 
-  filterItemsByCategory = (category) => {};
+  filterItemsByCategory = (category, itemsArray) => {
+    let itemObj = { category: category, items: [] };
+    itemObj.items = itemsArray.filter((item) => item.category === category);
+    return itemObj;
+  };
 
   render() {
-    const items = this.state.menuItems.map((item) => {
-      return <div key={item.id}>{item.name}</div>;
-    });
-    return <div>{items}</div>;
+    const menuItems = this.state.menuItems;
+    const appetizers = this.filterItemsByCategory("appetizers", menuItems);
+    const noodles = this.filterItemsByCategory("noodles", menuItems);
+    const sushi = this.filterItemsByCategory("sushi", menuItems);
+
+    if (menuItems.length === 0) {
+      return <div>Loading...</div>;
+    }
+
+    return (
+      <div>
+        <Category category={appetizers} />
+        <Category category={noodles} />
+        <Category category={sushi} />
+      </div>
+    );
   }
 }
 
