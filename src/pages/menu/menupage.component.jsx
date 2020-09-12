@@ -41,7 +41,7 @@ class MenuPage extends React.Component {
     }
 
     return (
-      <div className="px-10 mt-10">
+      <div className="px-5 mt-10">
         <Category category={appetizers} />
         <Category category={noodles} />
         <Category category={sushi} />
