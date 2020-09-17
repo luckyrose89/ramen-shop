@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({currentUser}) => {
   return (
     <header className=" flex justify-between items-center bg-gray-900 py-3 px-10">
       <div>

@@ -7,6 +7,7 @@ class SignupPage extends React.Component {
     this.state = {
       username: "",
       email: "",
+      address: "",
       password: "",
       confirmPassword: "",
     };
@@ -23,7 +24,7 @@ class SignupPage extends React.Component {
 
   render() {
     return (
-      <div className="max-w-sm mx-auto mt-20 px-5">
+      <div className="max-w-sm mx-auto my-20 px-5">
         <form onSubmit={this.handleSubmit}>
           <FormInput
             name="username"
@@ -38,6 +39,14 @@ class SignupPage extends React.Component {
             type="email"
             label="Email"
             value={this.state.email}
+            handleChange={this.handleChange}
+            required
+          />
+          <FormInput
+            name="address"
+            type="input"
+            label="Address"
+            value={this.state.address}
             handleChange={this.handleChange}
             required
           />

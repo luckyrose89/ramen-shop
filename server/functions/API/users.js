@@ -10,6 +10,7 @@ const {
 } = require("../utils/validators");
 
 const firebase = require("firebase");
+const { request } = require("express");
 
 // initialize firebase app
 firebase.initializeApp(config);
@@ -97,6 +98,19 @@ exports.getUserInfo = async (request, response) => {
   } catch (error) {
     console.log(error);
     response.status(500).json({ error: "Something went wrong!" });
+  }
+};
+
+exports.updateUserInfo = async (request, response) => {
+  try {
+    let document = db.collection("users").doc(`${request.user.username}`);
+    await document.update(request.body);
+    return response.json({ message: "Details updated!" });
+  } catch (error) {
+    console.log(error);
+    return response
+      .status(500)
+      .json({ message: "Cannot update details at present!" });
   }
 };
 
