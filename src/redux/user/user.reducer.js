@@ -1,3 +1,5 @@
+import { UserActionTypes } from "./user.types";
+
 const INITIAL_STATE = {
   loggedIn: false,
   user: {},
@@ -5,17 +7,17 @@ const INITIAL_STATE = {
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "SET_CURRENT_USER":
+    case UserActionTypes.SET_CURRENT_USER:
       return {
         loggedIn: true,
         user: { ...action.payload },
       };
-    case "UPDATE_USER":
+    case UserActionTypes.UPDATE_USER:
       return {
         ...state,
         user: { ...action.payload },
       };
-    case "LOG_OUT":
+    case UserActionTypes.LOG_OUT:
       localStorage.clear();
       return {
         loggedIn: false,

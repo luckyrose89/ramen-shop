@@ -1,0 +1,6 @@
+export const UserActionTypes = {
+  LOGIN_USER: "LOGIN_USER",
+  SET_CURRENT_USER: "SET_CURRENT_USER",
+  UPDATE_USER: "UPDATE_USER",
+  LOG_OUT: "LOG_OUT",
+};

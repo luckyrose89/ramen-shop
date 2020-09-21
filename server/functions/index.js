@@ -28,6 +28,6 @@ app.delete("/:itemId", deleteItem);
 app.post("/login", loginUser);
 app.post("/signup", signUpUser);
 app.get("/user", auth, getUserInfo);
-app.put("/user", auth, updateUserInfo);
+app.post("/user", auth, updateUserInfo);
 
 exports.api = functions.https.onRequest(app);
