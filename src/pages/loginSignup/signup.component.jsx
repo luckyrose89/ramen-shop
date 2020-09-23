@@ -6,6 +6,8 @@ class SignupPage extends React.Component {
     super();
     this.state = {
       username: "",
+      firstname: "",
+      lastname: "",
       email: "",
       address: "",
       password: "",
@@ -26,6 +28,22 @@ class SignupPage extends React.Component {
     return (
       <div className="max-w-sm mx-auto my-20 px-5">
         <form onSubmit={this.handleSubmit}>
+          <FormInput
+            name="firstname"
+            type="text"
+            label="First Name"
+            value={this.state.firstname}
+            handleChange={this.handleChange}
+            required
+          />
+          <FormInput
+            name="lastname"
+            type="text"
+            label="Last Name"
+            value={this.state.lastname}
+            handleChange={this.handleChange}
+            required
+          />
           <FormInput
             name="username"
             type="text"

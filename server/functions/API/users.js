@@ -42,6 +42,8 @@ exports.signUpUser = async (request, response) => {
     const user = {
       username: request.body.username,
       email: request.body.email,
+      firstname: request.body.firstname,
+      lastname: request.body.lastname,
       address: request.body.address,
       password: request.body.password,
       confirmPassword: request.body.confirmPassword,

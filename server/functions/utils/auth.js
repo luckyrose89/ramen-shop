@@ -23,6 +23,8 @@ module.exports = async (request, response, next) => {
       .limit(1)
       .get();
     request.user.username = userData.docs[0].data().username;
+    request.user.firstname = userData.docs[0].data().firstname;
+    request.user.lastname = userData.docs[0].data().lastname;
     request.user.email = userData.docs[0].data().email;
     request.user.address = userData.docs[0].data().address;
     console.log(request.user);
