@@ -10,7 +10,6 @@ const {
 } = require("../utils/validators");
 
 const firebase = require("firebase");
-const { request } = require("express");
 
 // initialize firebase app
 firebase.initializeApp(config);
@@ -29,7 +28,6 @@ exports.loginUser = async (request, response) => {
       .auth()
       .signInWithEmailAndPassword(user.email, user.password);
     let tokenUserId = await tokenData.user.getIdToken();
-
     return response.json({ tokenUserId });
   } catch (error) {
     console.log(error);
