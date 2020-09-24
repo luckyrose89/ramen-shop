@@ -24,7 +24,7 @@ export const fetchLoginUser = (userInfo) => async (dispatch) => {
       "http://localhost:5000/ramen-shop/us-central1/api/login",
       userInfo
     );
-    localStorage.setItem("AuthToken", `Bearer ${response.data.token}`);
+    localStorage.setItem("AuthToken", `Bearer ${response.data.tokenUserId}`);
     dispatch(loginUser());
   } catch (error) {
     console.log(error);
