@@ -2,7 +2,6 @@ import { UserActionTypes } from "./user.types";
 
 const INITIAL_STATE = {
   loggedIn: false,
-  loading: true,
   user: {},
 };
 
@@ -17,7 +16,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         user: { ...action.payload },
-        loading: false,
       };
     case UserActionTypes.UPDATE_USER:
       return {
