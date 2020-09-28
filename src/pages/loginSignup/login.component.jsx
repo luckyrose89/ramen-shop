@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
 import FormInput from "../../components/form-input/formInput.component";
-import { fetchLoginUser } from "../../redux/user/user.actions";
 
 // conditionally render login or signup form
 class LoginPage extends React.Component {
@@ -67,8 +65,4 @@ class LoginPage extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchLoginUser: (userInfo) => dispatch(fetchLoginUser(userInfo)),
-});
-
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default LoginPage;
