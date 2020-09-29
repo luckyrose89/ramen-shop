@@ -13,5 +13,47 @@ const config = {
   measurementId: "G-KX7HCG2W2F",
 };
 
+export const createUserProfileDocument = async (user, additionalData) => {
+  if (!user) return;
+
+  const userRef = firestore.doc(`users/${user.uid}`);
+
+  const snapshot = await userRef.get();
+
+  if (!snapshot.exists) {
+    const { username, email, firstname, lastname, address } = user;
+    const createdAt = new Date();
+    try {
+      await userRef.set({
+        username,
+        email,
+        firstname,
+        lastname,
+        address,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log("Error creating user", error.message);
+    }
+  }
+
+  return getUserDocument;
+};
+
+export const getUserDocument = async (uid) => {
+  if (!uid) return null;
+  try {
+    return firestore.collection("users").doc(uid);
+  } catch (error) {
+    console.error("Error fetching user", error.message);
+  }
+};
+
 // Initialize App
 firebase.initializeApp(config);
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+
+export default firebase;
