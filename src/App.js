@@ -12,6 +12,7 @@ import CheckoutPage from "./pages/checkout/checkout.component";
 import LoginPage from "./pages/loginSignup/login.component";
 import Header from "./components/header/header.component";
 import SignupPage from "./pages/loginSignup/signup.component";
+import UserPage from "./pages/userDashboard/userpage.component";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -21,7 +22,6 @@ class App extends React.Component {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
-
         userRef.onSnapshot((snapShot) => {
           setCurrentUser({
             id: snapShot.id,
@@ -57,6 +57,13 @@ class App extends React.Component {
             path="/signup"
             render={() =>
               this.props.currentUser ? <Redirect to="/" /> : <SignupPage />
+            }
+          />
+          <Route
+            exact
+            path="/profile"
+            render={() =>
+              this.props.currentUser ? <UserPage /> : <Redirect to="/" />
             }
           />
         </Switch>
