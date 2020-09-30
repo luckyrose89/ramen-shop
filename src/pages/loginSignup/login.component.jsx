@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../../firebase/firebase.utils";
 
 import FormInput from "../../components/form-input/formInput.component";
 
@@ -10,14 +11,21 @@ class LoginPage extends React.Component {
     this.state = {
       email: "",
       password: "",
-      errors: [],
+      error: "",
     };
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    this.props.fetchLoginUser(this.state);
-    this.props.history.push("/");
+    const { email, password } = this.state;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "", error: "" });
+    } catch (error) {
+      console.log(error);
+      this.setState({ error: error });
+    }
   };
 
   handleChange = (event) => {

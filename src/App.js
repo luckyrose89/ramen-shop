@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -21,13 +21,15 @@ class App extends React.Component {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot((snapshot) => {
+
+        userRef.onSnapshot((snapShot) => {
           setCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data(),
+            id: snapShot.id,
+            ...snapShot.data(),
           });
         });
       }
+      setCurrentUser(userAuth);
     });
   }
 
@@ -43,8 +45,20 @@ class App extends React.Component {
           <Route exact path="/" component={HomePage} />
           <Route path="/menu" component={MenuPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/signup" component={SignupPage} />
+          <Route
+            exact
+            path="/login"
+            render={() =>
+              this.props.currentUser ? <Redirect to="/" /> : <LoginPage />
+            }
+          />
+          <Route
+            exact
+            path="/signup"
+            render={() =>
+              this.props.currentUser ? <Redirect to="/" /> : <SignupPage />
+            }
+          />
         </Switch>
       </div>
     );
