@@ -43,15 +43,6 @@ class SignupPage extends React.Component {
         lastname,
         address,
       });
-      this.setState({
-        email: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
-        address: "",
-        firstname: "",
-        lastname: "",
-      });
     } catch (error) {
       this.setState({ error: error.code });
     }
