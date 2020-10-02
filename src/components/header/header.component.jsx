@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import CartIcon from "../cart-icon/cartIcon.component";
 import AccountDropdown from "../account-dropdown/accountDropdown.component";
 import CartDropdown from "../cart-dropdown/cartDropdown.component";
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
   return (
     <header className=" flex justify-between items-center bg-gray-900 py-3 px-10">
       <div>
@@ -26,16 +27,16 @@ const Header = ({ currentUser }) => {
         <Link to="/menu" className="px-3">
           Menu
         </Link>
-
         <CartIcon />
       </div>
-      <CartDropdown />
+      {hidden ? null : <CartDropdown />}
     </header>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 
 export default connect(mapStateToProps)(Header);

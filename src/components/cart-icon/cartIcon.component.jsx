@@ -1,8 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
+import { toggleCartHidden } from "../../redux/cart/cart.actions";
 
-const CartIcon = () => {
+const CartIcon = ({ toggleCartHidden }) => {
   return (
-    <div className="inline-block relative px-3">
+    <div
+      className="inline-block relative px-3 cursor-pointer"
+      onClick={toggleCartHidden}
+    >
       <svg
         className="h-6 w-6 fill-current text-white"
         viewBox="-35 0 512 512.00102"
@@ -16,4 +21,8 @@ const CartIcon = () => {
   );
 };
 
-export default CartIcon;
+const mapDispatchToProps = (dispatch) => ({
+  toggleCartHidden: () => dispatch(toggleCartHidden()),
+});
+
+export default connect(null, mapDispatchToProps)(CartIcon);
