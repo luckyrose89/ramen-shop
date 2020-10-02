@@ -5,6 +5,7 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import CartIcon from "../cart-icon/cartIcon.component";
 import AccountDropdown from "../account-dropdown/accountDropdown.component";
+import CartDropdown from "../cart-dropdown/cartDropdown.component";
 
 const Header = ({ currentUser }) => {
   return (
@@ -25,10 +26,10 @@ const Header = ({ currentUser }) => {
         <Link to="/menu" className="px-3">
           Menu
         </Link>
-        <Link to="/checkout" className="px-3 align-middle">
-          <CartIcon />
-        </Link>
+
+        <CartIcon />
       </div>
+      <CartDropdown />
     </header>
   );
 };

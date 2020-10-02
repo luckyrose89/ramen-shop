@@ -2,7 +2,7 @@ import React from "react";
 
 const CartIcon = () => {
   return (
-    <div className="inline-block relative">
+    <div className="inline-block relative px-3">
       <svg
         className="h-6 w-6 fill-current text-white"
         viewBox="-35 0 512 512.00102"
