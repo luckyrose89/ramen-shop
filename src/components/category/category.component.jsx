@@ -9,7 +9,7 @@ const Category = (props) => {
       </h2>
       <div>
         {props.category.items.map((item) => {
-          return <MenuItem key={item.id} {...item} />;
+          return <MenuItem key={item.id} item={item} />;
         })}
       </div>
     </div>
