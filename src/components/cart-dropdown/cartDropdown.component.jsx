@@ -11,7 +11,7 @@ import "./cartDropdown.styles.scss";
 
 const CartDropdown = ({ history, dispatch, cartItems }) => {
   return (
-    <div className="absolute cart-dropdown w-64 z-10 px-4 shadow-lg flex flex-col items-center">
+    <div className="absolute cart-dropdown w-64 z-10 px-4 shadow-2xl flex flex-col items-center">
       <div className="flex flex-col overflow-y-scroll">
         {cartItems.length ? (
           cartItems.map((cartItem) => (
