@@ -1,27 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
+import {
+  selectCurrentUser,
+  selectUserDropdown,
+} from "../../redux/user/user.selectors";
+import { toggleUserOptions } from "../../redux/user/user.actions";
 
 class AccountDropdown extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpen: false,
-    };
-  }
-
-  handleClick = () => {
-    if (this.state.isOpen) {
-      this.setState({ isOpen: false });
-    } else {
-      this.setState({ isOpen: true });
-    }
-  };
-
   handleSignOut = () => {
     this.setState({ isOpen: false });
     auth.signOut();
@@ -32,18 +20,23 @@ class AccountDropdown extends React.Component {
       <div className="inline-block relative">
         <button
           className="px-3 hover:bg-gray-700 focus:outline-none"
-          onClick={this.handleClick}
+          onClick={() => {
+            this.props.dispatch(toggleUserOptions());
+          }}
         >
           {this.props.currentUser.username} &#x2193;
         </button>
-        {this.state.isOpen ? (
+        {!this.props.dropdownOpen ? (
           <div className="absolute mt-2 w-32 py-2 bg-white shadow-md">
-            <Link
-              className="px-4 py-2 block text-gray-800 hover:bg-gray-500 hover:text-white"
-              to="/profile"
+            <button
+              className="px-4 py-2 block w-full text-left text-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none"
+              onClick={() => {
+                this.props.history.push("/profile");
+                this.props.dispatch(toggleUserOptions());
+              }}
             >
               Profile
-            </Link>
+            </button>
             <button
               className="px-4 py-2 block w-full text-left text-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none"
               onClick={this.handleSignOut}
@@ -59,6 +52,7 @@ class AccountDropdown extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  dropdownOpen: selectUserDropdown,
 });
 
-export default connect(mapStateToProps)(AccountDropdown);
+export default withRouter(connect(mapStateToProps)(AccountDropdown));

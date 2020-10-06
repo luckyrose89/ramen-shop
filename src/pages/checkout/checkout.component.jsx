@@ -10,8 +10,8 @@ import CheckoutItem from "../../components/checkout-item/checkoutItem.component"
 
 const CheckoutPage = ({ cartItems, total }) => {
   return (
-    <div className="px-5 my-10 max-w-3xl mx-auto">
-      <h1 className="text-center sm:text-2xl uppercase text-gray-800 my-12">
+    <div className="px-5 mt-10 mb-32 max-w-3xl mx-auto">
+      <h1 className="text-center sm:text-2xl uppercase text-gray-800  my-4 sm:my-12">
         Checkout
       </h1>
       <div className="hidden sm:flex text-center my-5">
@@ -34,6 +34,9 @@ const CheckoutPage = ({ cartItems, total }) => {
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
+      <div className="mt-6">
+        <span>TOTAL: ${total.toFixed(2)}</span>
+      </div>
     </div>
   );
 };

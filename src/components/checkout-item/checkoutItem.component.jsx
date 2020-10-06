@@ -16,11 +16,11 @@ const CheckoutItem = ({ cartItem, addItem, removeItem, clearItem }) => {
       </div>
       <span className="w-1/5 px-2">{name}</span>
       <span className="w-1/5 px-2">
-        <button className="text-lg" onClick={() => removeItem(cartItem)}>
+        <button className="px-1 py-1" onClick={() => removeItem(cartItem)}>
           &#10094;
         </button>
-        <span className="px-2">{quantity}</span>
-        <button className="text-lg" onClick={() => addItem(cartItem)}>
+        <span className="px-1">{quantity}</span>
+        <button className="px-1 py-1" onClick={() => addItem(cartItem)}>
           &#10095;
         </button>
       </span>
