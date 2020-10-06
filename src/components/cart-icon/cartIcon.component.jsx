@@ -7,7 +7,7 @@ import { selectCartItemsCount } from "../../redux/cart/cart.selectors";
 const CartIcon = ({ toggleCartHidden, itemCount }) => {
   return (
     <div
-      className="inline-block relative px-3 cursor-pointer"
+      className="inline-block relative px-3 align-bottom cursor-pointer"
       onClick={toggleCartHidden}
     >
       <svg

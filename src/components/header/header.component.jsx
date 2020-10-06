@@ -10,7 +10,7 @@ import CartDropdown from "../cart-dropdown/cartDropdown.component";
 
 const Header = ({ currentUser, hidden }) => {
   return (
-    <header className=" flex justify-between items-center bg-gray-900 py-3 px-10">
+    <header className=" flex justify-between items-center bg-gray-900 py-4 px-10">
       <div>
         <Link to="/">
           <h1 className="text-white">Ramen Shop</h1>

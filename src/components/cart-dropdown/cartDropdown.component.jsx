@@ -11,14 +11,14 @@ import "./cartDropdown.styles.scss";
 
 const CartDropdown = ({ history, dispatch, cartItems }) => {
   return (
-    <div className="absolute cart-dropdown w-64 z-10 px-4 shadow-2xl flex flex-col items-center">
+    <div className="absolute cart-dropdown w-64 z-10 px-4 shadow-2xl flex flex-col items-center bg-white">
       <div className="flex flex-col overflow-y-scroll">
         {cartItems.length ? (
           cartItems.map((cartItem) => (
             <CartItem key={cartItem.id} item={cartItem} />
           ))
         ) : (
-          <span>Your Cart is Empty!</span>
+          <span className="my-10">Your Cart is Empty!</span>
         )}
       </div>
       <button

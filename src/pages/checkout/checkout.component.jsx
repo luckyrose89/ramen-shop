@@ -10,24 +10,24 @@ import CheckoutItem from "../../components/checkout-item/checkoutItem.component"
 
 const CheckoutPage = ({ cartItems, total }) => {
   return (
-    <div className="px-5 mt-10">
+    <div className="px-5 my-10 max-w-3xl mx-auto">
       <h1 className="text-center sm:text-2xl uppercase text-gray-800 my-12">
         Checkout
       </h1>
-      <div className="hidden sm:flex">
-        <div>
+      <div className="hidden sm:flex text-center my-5">
+        <div className="w-1/5 px-2">
           <span>Product</span>
         </div>
-        <div>
+        <div className="w-1/5 px-2">
           <span>Description</span>
         </div>
-        <div>
+        <div className="w-1/5 px-2">
           <span>Quantity</span>
         </div>
-        <div>
+        <div className="w-1/5 px-2">
           <span>Price</span>
         </div>
-        <div>
+        <div className="w-1/5 px-2">
           <span>Remove</span>
         </div>
       </div>
