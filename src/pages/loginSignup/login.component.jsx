@@ -35,7 +35,7 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <div className="max-w-sm mx-auto mt-20">
+      <div className="max-w-sm mx-auto mt-20 py-10 px-5">
         <form onSubmit={this.handleSubmit}>
           <FormInput
             name="email"

@@ -55,7 +55,7 @@ class SignupPage extends React.Component {
 
   render() {
     return (
-      <div className="max-w-sm sm:max-w-md mx-auto my-20 px-5">
+      <div className="max-w-sm sm:max-w-md mx-auto my-20 py-10 px-5">
         <form onSubmit={this.handleSubmit}>
           <FormInput
             name="firstname"
