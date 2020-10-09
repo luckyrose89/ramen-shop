@@ -34,7 +34,7 @@ const CheckoutPage = ({ cartItems, total }) => {
       {cartItems.map((cartItem) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
-      <div className="mt-6">
+      <div className="mt-6 text-right">
         <span>TOTAL: ${total.toFixed(2)}</span>
       </div>
     </div>
