@@ -37,14 +37,14 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 // add new doc to orderHistory collection
-export const createOrderHistoryDocument = async (userId, additionalData) => {
+export const createOrderHistoryDocument = async (userId, cartItems) => {
   const orderHistoryCollectionRef = firestore.collection("orderHistory");
   const createdAt = new Date();
   try {
     await orderHistoryCollectionRef.add({
-      userId,
+      userId: userId,
+      cartItems: cartItems,
       createdAt,
-      ...additionalData,
     });
   } catch (error) {
     console.log("Error logging order history", error.message);
@@ -52,6 +52,17 @@ export const createOrderHistoryDocument = async (userId, additionalData) => {
 };
 
 // retrieve docs of user from orderHistory by userId
+export const getOrderHistoryDocuments = async (userId) => {
+  try {
+    const orderHistoryDocsSnapshot = await firestore
+      .collection("orderHistory")
+      .where("userId" === userId)
+      .get();
+    orderHistoryDocsSnapshot.forEach((doc) => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.log("Error fetching requested documents ", error.message);
+  }
+};
 
 // Initialize App
 firebase.initializeApp(config);

@@ -39,10 +39,12 @@ const CheckoutPage = ({ cartItems, total }) => {
         <span>TOTAL: ${total.toFixed(2)}</span>
       </div>
       <div className="mt-6 text-center text-red-600">
-        <p className="py-4">*Please use the following test credit card
-        <br />
-        4242 4242 4242 4242/ exp: 12/2021 / CVV: 123</p>
-        <StripeButton price={total}/>
+        <p className="py-4">
+          *Please use the following test credit card
+          <br />
+          4242 4242 4242 4242/ exp: 12/2021 / CVV: 123
+        </p>
+        <StripeButton price={total} />
       </div>
     </div>
   );
