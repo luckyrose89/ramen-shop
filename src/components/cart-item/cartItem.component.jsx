@@ -7,7 +7,7 @@ const CartItem = ({ item: { name, price, quantity, imageURL } }) => {
       <div className="w-2/3 flex flex-col items-start px-4 hover:underline">
         <span className="text-sm">{name}</span>
         <span className="text-sm">
-          {quantity} X {price}
+          {quantity} X {price.toFixed(2)}
         </span>
       </div>
     </div>

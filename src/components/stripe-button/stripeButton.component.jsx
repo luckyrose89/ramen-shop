@@ -3,15 +3,17 @@ import {connect} from "react-redux";
 import {createStructuredSelector} from "reselect";
 import {selectCartItems} from "../../redux/cart/cart.selectors";
 import {selectCurrentUser} from "../../redux/user/user.selectors";
+import {emptyCartItems} from "../../redux/cart/cart.actions";
 import {createOrderHistoryDocument} from "../../firebase/firebase.utils";
 import StripeCheckout from "react-stripe-checkout";
 
-const StripeButton = ({price, currentUser, cartItems}) => {
+const StripeButton = ({price, currentUser, cartItems, emptyCartItems}) => {
     const priceForStripe = price * 100;
     const publishableKey = "pk_test_51GxxdHKf1CtSxFdrowYToiXQhB31w24YxHrt58q4P8Zk3kwMeWcs3XnrJ3EFY3KITWJgWbzg7xGSvdo20LzkGajO00SndCMQoq";
     const onToken = async (token) => {
         console.log(token);
         await createOrderHistoryDocument(currentUser.id,cartItems);
+        emptyCartItems();
         alert("Payment Successful");
       };
 
@@ -36,4 +38,8 @@ const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems
 })
 
-export default connect(mapStateToProps)(StripeButton);
+const mapDispatchToProps = (dispatch) => ({
+    emptyCartItems: () => dispatch(emptyCartItems())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(StripeButton);
