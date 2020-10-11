@@ -36,6 +36,23 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+// add new doc to orderHistory collection
+export const createOrderHistoryDocument = async (userId, additionalData) => {
+  const orderHistoryCollectionRef = firestore.collection("orderHistory");
+  const createdAt = new Date();
+  try {
+    await orderHistoryCollectionRef.add({
+      userId,
+      createdAt,
+      ...additionalData,
+    });
+  } catch (error) {
+    console.log("Error logging order history", error.message);
+  }
+};
+
+// retrieve docs of user from orderHistory by userId
+
 // Initialize App
 firebase.initializeApp(config);
 
