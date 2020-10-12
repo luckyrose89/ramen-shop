@@ -2,11 +2,27 @@ import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { getOrderHistoryDocuments } from "../../firebase/firebase.utils";
 import UserInfoBox from "../../components/user-infoBox/userInfoBox.component";
 
 class UserPage extends React.Component {
-  componentDidMount = () => {
-    const currentUser = this.props;
+  constructor(props) {
+    super(props);
+    this.state = {
+      orderHistory: [],
+    };
+  }
+
+  componentDidMount = async () => {
+    const currentUser = this.props.currentUser;
+    const orderHistoryRefs = await getOrderHistoryDocuments(currentUser.id);
+    const result = [];
+    orderHistoryRefs.forEach((doc) => {
+      result.push({ id: doc.id, ...doc.data() });
+    });
+    this.setState({
+      orderHistory: result,
+    });
   };
 
   render() {

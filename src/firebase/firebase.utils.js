@@ -56,9 +56,9 @@ export const getOrderHistoryDocuments = async (userId) => {
   try {
     const orderHistoryDocsSnapshot = await firestore
       .collection("orderHistory")
-      .where("userId" === userId)
+      .where("userId", "==", userId)
       .get();
-    orderHistoryDocsSnapshot.forEach((doc) => ({ id: doc.id, ...doc.data() }));
+    return orderHistoryDocsSnapshot;
   } catch (error) {
     console.log("Error fetching requested documents ", error.message);
   }
