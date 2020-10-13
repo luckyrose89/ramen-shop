@@ -5,11 +5,11 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../../redux/cart/cart.selectors";
-
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 import CheckoutItem from "../../components/checkout-item/checkoutItem.component";
 import StripeButton from "../../components/stripe-button/stripeButton.component";
 
-const CheckoutPage = ({ cartItems, total }) => {
+const CheckoutPage = ({ cartItems, total, currentUser }) => {
   return (
     <div className="px-5 py-5 mt-10 mb-32 max-w-3xl mx-auto">
       <h1 className="text-center sm:text-2xl uppercase text-gray-800 my-10">
@@ -44,13 +44,18 @@ const CheckoutPage = ({ cartItems, total }) => {
           <br />
           4242 4242 4242 4242/ exp: 12/2021 / CVV: 123
         </p>
-        <StripeButton price={total} />
+        {currentUser === null || cartItems.length === 0 ? (
+          <p>Please login to proceed to buy</p>
+        ) : (
+          <StripeButton price={total} />
+        )}
       </div>
     </div>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
   cartItems: selectCartItems,
   total: selectCartTotal,
 });
