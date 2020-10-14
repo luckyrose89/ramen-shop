@@ -57,6 +57,7 @@ export const getOrderHistoryDocuments = async (userId) => {
     const orderHistoryDocsSnapshot = await firestore
       .collection("orderHistory")
       .where("userId", "==", userId)
+      .orderBy("createdAt", "desc")
       .get();
     return orderHistoryDocsSnapshot;
   } catch (error) {
