@@ -45,7 +45,7 @@ const CheckoutPage = ({ cartItems, total, currentUser }) => {
           4242 4242 4242 4242/ exp: 12/2021 / CVV: 123
         </p>
         {currentUser === null || cartItems.length === 0 ? (
-          <p>Please login to proceed to buy</p>
+          <p>Please login to proceed to buy or add items to your cart</p>
         ) : (
           <StripeButton price={total} />
         )}

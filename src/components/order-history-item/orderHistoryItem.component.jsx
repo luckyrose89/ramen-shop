@@ -1,6 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { setCartItems } from "../../redux/cart/cart.actions";
 
-const OrderHistoryItem = ({ item }) => {
+const OrderHistoryItem = ({ item, history, dispatch }) => {
   const cartItems = item.cartItems;
   let orderDate = item.createdAt.toDate().toDateString();
   let itemsOrdered = [];
@@ -14,11 +17,17 @@ const OrderHistoryItem = ({ item }) => {
       <div className="py-2">{itemsOrdered.join(", ")}</div>
       <div className="py-2">Total: ${orderTotal.toFixed(2)}</div>
       <div>Ordered on: {orderDate}</div>
-      <button className="absolute top-0 right-0 text-white bg-green-700 px-2 py-1 mr-2 mt-2 hover:bg-green-800">
+      <button
+        onClick={() => {
+          history.push("/checkout");
+          dispatch(setCartItems(cartItems));
+        }}
+        className="absolute top-0 right-0 text-white bg-green-700 px-2 py-1 mr-2 mt-2 hover:bg-green-800"
+      >
         RE-ORDER
       </button>
     </div>
   );
 };
 
-export default OrderHistoryItem;
+export default withRouter(connect()(OrderHistoryItem));
