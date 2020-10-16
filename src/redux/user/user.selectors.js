@@ -11,3 +11,8 @@ export const selectCurrentUser = createSelector(
   [selectUser],
   (user) => user.currentUser
 );
+
+export const selectUserInfoEditForm = createSelector(
+  [selectUser],
+  (user) => user.userEditing
+);

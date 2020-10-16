@@ -2,6 +2,7 @@ import { UserActionTypes } from "./user.types";
 
 const INITIAL_STATE = {
   hidden: true,
+  userEditing: false,
   currentUser: null,
 };
 
@@ -16,6 +17,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
+      };
+    case UserActionTypes.USER_EDITING_SELF_INFO:
+      return {
+        ...state,
+        userEditing: !state.userEditing,
       };
     default:
       return state;

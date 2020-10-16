@@ -57,22 +57,24 @@ class SignupPage extends React.Component {
     return (
       <div className="max-w-sm sm:max-w-md mx-auto my-20 py-10 px-5">
         <form onSubmit={this.handleSubmit}>
-          <FormInput
-            name="firstname"
-            type="text"
-            label="First Name"
-            value={this.state.firstname}
-            handleChange={this.handleChange}
-            required
-          />
-          <FormInput
-            name="lastname"
-            type="text"
-            label="Last Name"
-            value={this.state.lastname}
-            handleChange={this.handleChange}
-            required
-          />
+          <div className="flex justify-between">
+            <FormInput
+              name="firstname"
+              type="text"
+              label="First Name"
+              value={this.state.firstname}
+              handleChange={this.handleChange}
+              required
+            />
+            <FormInput
+              name="lastname"
+              type="text"
+              label="Last Name"
+              value={this.state.lastname}
+              handleChange={this.handleChange}
+              required
+            />
+          </div>
           <FormInput
             name="username"
             type="text"

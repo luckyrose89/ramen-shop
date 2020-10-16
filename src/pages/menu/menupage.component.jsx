@@ -12,6 +12,7 @@ class MenuPage extends React.Component {
   }
 
   componentDidMount = async () => {
+    document.title = "This is the menu page";
     try {
       const menuData = await axios.get(
         "http://localhost:5000/ramen-shop/us-central1/api"
@@ -37,7 +38,7 @@ class MenuPage extends React.Component {
     const sushi = this.filterItemsByCategory("sushi", menuItems);
 
     if (menuItems.length === 0) {
-      return <div>Loading...</div>;
+      return <div className="px-5 py-10 mt-20">Loading...</div>;
     }
 
     return (
