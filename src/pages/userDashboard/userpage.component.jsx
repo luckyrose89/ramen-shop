@@ -19,7 +19,7 @@ class UserPage extends React.Component {
   }
 
   componentDidMount = async () => {
-    document.title = "This is the user profile page";
+    document.title = "Ramen Shop - User Page";
     const currentUser = this.props.currentUser;
     const orderHistoryRefs = await getOrderHistoryDocuments(currentUser.id);
     const result = [];

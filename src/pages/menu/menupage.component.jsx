@@ -12,7 +12,7 @@ class MenuPage extends React.Component {
   }
 
   componentDidMount = async () => {
-    document.title = "This is the menu page";
+    document.title = "Ramen Shop - Menu";
     try {
       const menuData = await axios.get(
         "http://localhost:5000/ramen-shop/us-central1/api"

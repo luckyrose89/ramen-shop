@@ -22,6 +22,10 @@ class UserInfoEditForm extends React.Component {
     this.setState({ [name]: value });
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   render() {
     return (
       <div className="relative max-w-xl mx-auto shadow-lg h-auto w-full py-8 px-8 text-sm sm:text-base">
@@ -43,7 +47,6 @@ class UserInfoEditForm extends React.Component {
               value={this.state.firstname}
               onChange={this.handleChange}
               name="firstname"
-              required
             />
             <input
               type="text"
@@ -52,7 +55,6 @@ class UserInfoEditForm extends React.Component {
               value={this.state.lastname}
               onChange={this.handleChange}
               name="lastname"
-              required
             />
           </div>
           <input
@@ -62,7 +64,6 @@ class UserInfoEditForm extends React.Component {
             value={this.state.email}
             onChange={this.handleChange}
             name="email"
-            required
           />
           <input
             type="text"
@@ -71,9 +72,8 @@ class UserInfoEditForm extends React.Component {
             value={this.state.address}
             onChange={this.handleChange}
             name="address"
-            required
           />
-          <button className=" absolute top-0 right-0 mt-5 mr-5 my-2 py-1 px-2 text-green-800 font-bold">
+          <button className="absolute top-0 right-0 mt-5 mr-5 my-2 py-1 px-2 text-green-800 font-bold">
             Done
           </button>
         </form>
