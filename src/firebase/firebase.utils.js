@@ -65,6 +65,23 @@ export const getOrderHistoryDocuments = async (userId) => {
   }
 };
 
+// update user document
+export const updateUserDocument = async (id, additionalData) => {
+  const { username, firstname, lastname, address, email } = additionalData;
+  try {
+    const userRef = firestore.doc(`users/${id}`);
+    await userRef.set({
+      email,
+      username,
+      firstname,
+      lastname,
+      address,
+    });
+  } catch (error) {
+    console.log("Error updating user document", error.message);
+  }
+};
+
 // Initialize App
 firebase.initializeApp(config);
 
