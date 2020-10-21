@@ -64,7 +64,6 @@ class UserInfoEditForm extends React.Component {
                 value={this.state.firstname}
                 onChange={this.handleChange}
                 name="firstname"
-                aria-label="First Name"
                 required
               />
             </div>
@@ -78,7 +77,6 @@ class UserInfoEditForm extends React.Component {
                 value={this.state.lastname}
                 onChange={this.handleChange}
                 name="lastname"
-                aria-label="Last Name"
                 required
               />
             </div>
@@ -93,7 +91,6 @@ class UserInfoEditForm extends React.Component {
               value={this.state.email}
               onChange={this.handleChange}
               name="email"
-              aria-label="Email"
               required
             />
           </div>
@@ -107,7 +104,6 @@ class UserInfoEditForm extends React.Component {
               value={this.state.address}
               onChange={this.handleChange}
               name="address"
-              aria-label="Address"
               required
             />
           </div>

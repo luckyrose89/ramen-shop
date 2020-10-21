@@ -55,9 +55,9 @@ class SignupPage extends React.Component {
 
   render() {
     return (
-      <div className="max-w-sm sm:max-w-md mx-auto my-20 py-10 px-5">
+      <div className="max-w-sm sm:max-w-md mx-auto my-20 py-10 px-5 shadow-md">
         <form onSubmit={this.handleSubmit}>
-          <div className="flex justify-between">
+          <div className="sm:flex justify-between">
             <FormInput
               name="firstname"
               type="text"
