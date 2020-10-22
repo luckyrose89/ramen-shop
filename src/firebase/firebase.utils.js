@@ -39,11 +39,11 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 // add new doc to orderHistory collection
 export const createOrderHistoryDocument = async (userId, cartItems) => {
-  const orderHistoryCollectionRef = firestore.collection("orderHistory");
+  const userDocRef = firestore.doc(`users/${userId}`);
+  const orderHistoryCollectionRef = userDocRef.collection("/orderHistory");
   const createdAt = new Date();
   try {
     await orderHistoryCollectionRef.add({
-      userId: userId,
       cartItems: cartItems,
       createdAt,
     });
@@ -56,8 +56,7 @@ export const createOrderHistoryDocument = async (userId, cartItems) => {
 export const getOrderHistoryDocuments = async (userId) => {
   try {
     const orderHistoryDocsSnapshot = await firestore
-      .collection("orderHistory")
-      .where("userId", "==", userId)
+      .collection(`users/${userId}/orderHistory`)
       .orderBy("createdAt", "desc")
       .get();
     return orderHistoryDocsSnapshot;
