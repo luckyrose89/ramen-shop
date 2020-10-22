@@ -43,6 +43,11 @@ class AccountDropdown extends React.Component {
             >
               Sign Out
             </button>
+            {this.props.currentUser.isAdmin ? (
+              <button className="px-4 py-2 block w-full text-left text-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none">
+                Manage
+              </button>
+            ) : null}
           </div>
         ) : null}
       </div>

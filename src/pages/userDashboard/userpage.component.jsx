@@ -44,7 +44,7 @@ class UserPage extends React.Component {
           My Recent Orders
         </p>
         {orderHistoryItems.length === 0 ? (
-          <div className="px-8 my-8 text-center">Loading...</div>
+          <div className="px-8 my-8 text-center">Order History Unavailable</div>
         ) : (
           orderHistoryItems.map((item) => (
             <OrderHistoryItem key={item.id} item={item} />
