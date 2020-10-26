@@ -5,13 +5,12 @@ const app = express();
 
 app.use(cors({ origin: true }));
 
-const { getMenu, postItem, editItem, deleteItem } = require("./API/menu");
+const { getMenu } = require("./API/menu");
+const { makeAdminUser } = require("./API/admin");
 
 // menu item routes
 
 app.get("/", getMenu);
-app.post("/", postItem);
-app.put("/:itemId", editItem);
-app.delete("/:itemId", deleteItem);
+app.put("/auth", makeAdminUser);
 
 exports.api = functions.https.onRequest(app);

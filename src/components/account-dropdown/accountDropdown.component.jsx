@@ -6,13 +6,17 @@ import { createStructuredSelector } from "reselect";
 import {
   selectCurrentUser,
   selectUserDropdown,
+  selectAdminMode,
 } from "../../redux/user/user.selectors";
-import { toggleUserOptions } from "../../redux/user/user.actions";
+import { toggleUserOptions, adminModeOff } from "../../redux/user/user.actions";
 
 class AccountDropdown extends React.Component {
   handleSignOut = () => {
     this.setState({ isOpen: false });
     auth.signOut();
+    if (this.props.adminMode) {
+      this.props.dispatch(adminModeOff());
+    }
   };
 
   render() {
@@ -37,17 +41,23 @@ class AccountDropdown extends React.Component {
             >
               Profile
             </button>
+            {this.props.adminMode ? (
+              <button
+                className="px-4 py-2 block w-full text-left text-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none"
+                onClick={() => {
+                  this.props.history.push("/admin");
+                  this.props.dispatch(toggleUserOptions());
+                }}
+              >
+                Manage
+              </button>
+            ) : null}
             <button
               className="px-4 py-2 block w-full text-left text-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none"
               onClick={this.handleSignOut}
             >
               Sign Out
             </button>
-            {this.props.currentUser.isAdmin ? (
-              <button className="px-4 py-2 block w-full text-left text-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none">
-                Manage
-              </button>
-            ) : null}
           </div>
         ) : null}
       </div>
@@ -58,6 +68,7 @@ class AccountDropdown extends React.Component {
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   dropdownOpen: selectUserDropdown,
+  adminMode: selectAdminMode,
 });
 
 export default withRouter(connect(mapStateToProps)(AccountDropdown));

@@ -3,6 +3,7 @@ import { UserActionTypes } from "./user.types";
 const INITIAL_STATE = {
   hidden: true,
   userEditing: false,
+  adminMode: false,
   currentUser: null,
 };
 
@@ -22,6 +23,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         userEditing: !state.userEditing,
+      };
+    case UserActionTypes.ADMIN_MODE_ON:
+      return {
+        ...state,
+        adminMode: true,
+      };
+    case UserActionTypes.ADMIN_MODE_OFF:
+      return {
+        ...state,
+        adminMode: false,
       };
     default:
       return state;

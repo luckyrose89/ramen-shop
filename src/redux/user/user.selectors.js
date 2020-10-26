@@ -16,3 +16,8 @@ export const selectUserInfoEditForm = createSelector(
   [selectUser],
   (user) => user.userEditing
 );
+
+export const selectAdminMode = createSelector(
+  [selectUser],
+  (user) => user.adminMode
+);
