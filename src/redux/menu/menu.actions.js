@@ -15,7 +15,7 @@ export const fetchMenuItemsFailure = (errorMessage) => ({
   payload: errorMessage,
 });
 
-export const getMenuItems = async (dispatch) => {
+export const getMenuItems = () => async (dispatch) => {
   try {
     dispatch(fetchMenuItemsStart());
     const itemsResult = await axios.get(

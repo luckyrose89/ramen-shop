@@ -1,28 +1,15 @@
 import React from "react";
-import axios from "axios";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
 import Category from "../../components/category/category.component";
+import { getMenuItems } from "../../redux/menu/menu.actions";
+import { selectMenuItems } from "../../redux/menu/menu.selectors";
 
 class MenuPage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      menuItems: [],
-    };
-  }
-
   componentDidMount = async () => {
     document.title = "Ramen Shop - Menu";
-    try {
-      const menuData = await axios.get(
-        "http://localhost:5000/ramen-shop/us-central1/api"
-      );
-      this.setState({
-        menuItems: menuData.data.menu,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    this.props.getMenuItems();
   };
 
   filterItemsByCategory = (category, itemsArray) => {
@@ -32,14 +19,14 @@ class MenuPage extends React.Component {
   };
 
   render() {
-    const menuItems = this.state.menuItems;
+    const menuItems = this.props.menu;
+    if (menuItems === null) {
+      return <div className="px-5 py-10 mt-20">Loading...</div>;
+    }
+
     const appetizers = this.filterItemsByCategory("appetizers", menuItems);
     const noodles = this.filterItemsByCategory("noodles", menuItems);
     const sushi = this.filterItemsByCategory("sushi", menuItems);
-
-    if (menuItems.length === 0) {
-      return <div className="px-5 py-10 mt-20">Loading...</div>;
-    }
 
     return (
       <div className="px-5 py-10 mt-20">
@@ -51,4 +38,12 @@ class MenuPage extends React.Component {
   }
 }
 
-export default MenuPage;
+const mapStateToProps = createStructuredSelector({
+  menu: selectMenuItems,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getMenuItems: () => dispatch(getMenuItems()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuPage);
