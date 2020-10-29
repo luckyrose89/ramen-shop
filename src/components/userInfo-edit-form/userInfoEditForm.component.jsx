@@ -85,7 +85,7 @@ class UserInfoEditForm extends React.Component {
           />
           <button
             type="submit"
-            className="absolute top-0 right-0 mt-5 mr-5 py-1 px-2 text-green-800 font-bold"
+            className="absolute top-0 right-0 mt-5 mr-5 py-1 px-2 text-green-800 font-bold hover:bg-green-800 hover:text-white"
           >
             Done
           </button>
