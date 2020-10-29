@@ -6,6 +6,8 @@ import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { updateUserDocument } from "../../firebase/firebase.utils";
 import { userEditMode } from "../../redux/user/user.actions";
 
+import FormInputTwo from "../form-input-v2/formInputTwo.component";
+
 class UserInfoEditForm extends React.Component {
   constructor(props) {
     super(props);
@@ -40,73 +42,47 @@ class UserInfoEditForm extends React.Component {
     return (
       <div className="relative max-w-xl mx-auto shadow-lg h-auto w-full py-8 px-8 text-sm sm:text-base">
         <form className="mt-2" onSubmit={this.handleSubmit}>
-          <div className="my-2 flex flex-col">
-            <label className="px-1 text-sm text-gray-900 font-bold">
-              Username
-            </label>
-            <input
-              type="text"
-              className="py-1 px-1 w-full border-solid border-b border-gray-500"
-              value={this.state.username}
-              onChange={this.handleChange}
-              name="username"
-              required
-            />
-          </div>
+          <FormInputTwo
+            name="username"
+            type="text"
+            label="Username"
+            value={this.state.username}
+            handleChange={this.handleChange}
+          />
           <div className="sm:flex">
-            <div className="my-2 flex flex-col w-full sm:w-1/2">
-              <label className="px-1 text-sm text-gray-900 font-bold">
-                First Name
-              </label>
-              <input
-                type="text"
-                className="py-1 px-1 border-solid border-b border-gray-500 mr-2"
-                value={this.state.firstname}
-                onChange={this.handleChange}
+            <div className="w-full sm:w-1/2 mr-2">
+              <FormInputTwo
                 name="firstname"
-                required
-              />
-            </div>
-            <div className="my-2 flex flex-col w-full sm:w-1/2">
-              <label className="px-1 text-sm text-gray-900 font-bold">
-                Last Name
-              </label>
-              <input
                 type="text"
-                className="py-1 px-1 border-solid border-b border-gray-500"
-                value={this.state.lastname}
-                onChange={this.handleChange}
+                label="First Name"
+                value={this.state.firstname}
+                handleChange={this.handleChange}
+              />
+            </div>
+            <div className="w-full sm:w-1/2">
+              <FormInputTwo
                 name="lastname"
-                required
+                type="text"
+                label="Last Name"
+                value={this.state.lastname}
+                handleChange={this.handleChange}
               />
             </div>
           </div>
-          <div className="my-2 flex flex-col">
-            <label className="px-1 text-sm text-gray-900 font-bold">
-              Email
-            </label>
-            <input
-              type="text"
-              className="py-1 px-1 w-full border-solid border-b border-gray-500"
-              value={this.state.email}
-              onChange={this.handleChange}
-              name="email"
-              required
-            />
-          </div>
-          <div className="my-2 flex flex-col">
-            <label className="px-1 text-sm text-gray-900 font-bold">
-              Address
-            </label>
-            <input
-              type="text"
-              className="py-1 px-1 w-full border-solid border-b border-gray-500"
-              value={this.state.address}
-              onChange={this.handleChange}
-              name="address"
-              required
-            />
-          </div>
+          <FormInputTwo
+            name="email"
+            type="email"
+            label="Email"
+            value={this.state.email}
+            handleChange={this.handleChange}
+          />
+          <FormInputTwo
+            name="address"
+            type="text"
+            label="Address"
+            value={this.state.address}
+            handleChange={this.handleChange}
+          />
           <button
             type="submit"
             className="absolute top-0 right-0 mt-5 mr-5 py-1 px-2 text-green-800 font-bold"

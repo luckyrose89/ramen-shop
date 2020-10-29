@@ -7,7 +7,7 @@ import { getMenuItems } from "../../redux/menu/menu.actions";
 import { selectMenuItems } from "../../redux/menu/menu.selectors";
 
 class MenuPage extends React.Component {
-  componentDidMount = async () => {
+  componentDidMount = () => {
     document.title = "Ramen Shop - Menu";
     this.props.getMenuItems();
   };

@@ -1,6 +1,10 @@
 import React from "react";
 
 class AdminPage extends React.Component {
+  componentDidMount = () => {
+    document.title = "Ramen Shop - Admin Dashboard";
+  };
+
   render() {
     return (
       <div className="max-w-2xl mx-auto my-20 px-5 py-10">
