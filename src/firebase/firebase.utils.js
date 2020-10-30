@@ -81,6 +81,16 @@ export const updateUserDocument = async (id, additionalData) => {
   }
 };
 
+// add new menu item
+export const addMenuItemDocument = async (data) => {
+  try {
+    const result = await firestore.collection("menu-items").add(data);
+    console.log("Menu item added! ", result);
+  } catch (error) {
+    console.log("Error adding item to the list ", error.message);
+  }
+};
+
 // Initialize App
 firebase.initializeApp(config);
 

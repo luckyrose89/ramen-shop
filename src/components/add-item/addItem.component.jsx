@@ -1,6 +1,8 @@
 import React from "react";
 import FormInputTwo from "../form-input-v2/formInputTwo.component";
 
+import { addMenuItemDocument } from "../../firebase/firebase.utils";
+
 class AddItem extends React.Component {
   constructor(props) {
     super(props);
@@ -12,19 +14,25 @@ class AddItem extends React.Component {
       category: "appetizers",
     };
   }
+
   handleChange = (event) => {
     const { value, name } = event.target;
     this.setState({ [name]: value });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      await addMenuItemDocument(this.state);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
     return (
       <div className="relative max-w-xl mx-auto shadow-lg h-auto w-full py-8 px-8 text-sm sm:text-base">
-        <form className="mt-2 text-left">
+        <form className="mt-2 text-left" onSubmit={this.handleSubmit}>
           <div className="sm:flex">
             <div className="w-full sm:w-1/2 mr-2">
               <FormInputTwo
