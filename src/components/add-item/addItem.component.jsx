@@ -22,8 +22,18 @@ class AddItem extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
+    const data = this.state;
+    console.log(data);
+    data.price = parseInt(data.price);
     try {
-      await addMenuItemDocument(this.state);
+      await addMenuItemDocument(data);
+      this.setState({
+        name: "",
+        price: "",
+        description: "",
+        imageURL: "",
+        category: "appetizers",
+      });
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +55,7 @@ class AddItem extends React.Component {
             </div>
             <div className="w-full sm:w-1/2">
               <FormInputTwo
-                type="text"
+                type="number"
                 name="price"
                 label="Price"
                 value={this.state.price}
