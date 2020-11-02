@@ -15,6 +15,11 @@ export const fetchMenuItemsFailure = (errorMessage) => ({
   payload: errorMessage,
 });
 
+export const getCurrentMenuItem = (item) => ({
+  type: MenuActionTypes.GET_CURRENT_ITEM,
+  payload: item,
+});
+
 export const getMenuItems = () => async (dispatch) => {
   try {
     dispatch(fetchMenuItemsStart());
