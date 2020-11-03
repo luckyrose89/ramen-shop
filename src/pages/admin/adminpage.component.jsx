@@ -7,21 +7,48 @@ import { selectMenuItems } from "../../redux/menu/menu.selectors";
 
 import AddItem from "../../components/add-item/addItem.component";
 import AdminMenuItem from "../../components/admin-menu-item/adminMenuItem.component";
+import ModalBackground from "../../components/modal-background/modalBackground.component";
+import DeletePopup from "../../components/delete-popup/deletePopup.component";
 
 class AdminPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showDeletePopup: false,
+      showEditPopup: false,
+    };
+  }
   componentDidMount = () => {
     document.title = "Ramen Shop - Admin Dashboard";
     this.props.getMenuItems();
   };
 
+  handleEditButton = () => {
+    alert("I clicked edit!");
+  };
+
+  handleDeleteButton = () => {
+    this.setState({
+      showDeletePopup: true,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      showDeletePopup: false,
+      showEditPopup: false,
+    });
+  };
+
   render() {
     const menuItems = this.props.menu;
+    const { showEditPopup, showDeletePopup } = this.state;
     if (menuItems === null) {
       return <div className="px-5 py-10 mt-20">Loading...</div>;
     }
 
     return (
-      <div className="max-w-4xl mx-auto my-20 px-5 py-10">
+      <div className="max-w-6xl mx-auto my-20 px-5 py-10">
         <h2 className="text-center sm:text-2xl font-bold text-red-800">
           Admin Dashboard
         </h2>
@@ -30,9 +57,19 @@ class AdminPage extends React.Component {
         </div>
         <div className="flex flex-wrap -mx-4 overflow-hidden my-10">
           {menuItems.map((item) => (
-            <AdminMenuItem key={item.id} item={item} />
+            <AdminMenuItem
+              key={item.id}
+              item={item}
+              handleEditButton={this.handleEditButton}
+              handleDeleteButton={this.handleDeleteButton}
+            />
           ))}
         </div>
+        {showDeletePopup ? (
+          <ModalBackground>
+            <DeletePopup closeModal={this.closeModal} />
+          </ModalBackground>
+        ) : null}
       </div>
     );
   }

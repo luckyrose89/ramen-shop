@@ -91,6 +91,10 @@ export const addMenuItemDocument = async (data) => {
   }
 };
 
+// update menu item
+
+// delete a menu item
+
 // Initialize App
 firebase.initializeApp(config);
 
