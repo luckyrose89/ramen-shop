@@ -11,8 +11,3 @@ export const selectIsFetching = createSelector(
   [selectMenu],
   (menu) => menu.isFetching
 );
-
-export const selectCurrentMenuItem = createSelector(
-  [selectMenu],
-  (menu) => menu.currentItem
-);

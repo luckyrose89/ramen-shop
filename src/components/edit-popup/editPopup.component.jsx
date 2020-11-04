@@ -18,10 +18,14 @@ class EditPopup extends React.Component {
     this.setState({ [name]: value });
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   render() {
     return (
       <div className="max-w-xl mx-auto shadow-lg h-auto py-10 px-5  mt-24 z-40 bg-white">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="sm:flex">
             <div className="w-full sm:w-1/2 mr-2">
               <FormInputTwo
@@ -77,13 +81,13 @@ class EditPopup extends React.Component {
           <div className="py-4">
             <button
               type="submit"
-              className="mr-5 py-1 px-2 bg-green-600 font-bold hover:bg-green-800 text-white"
+              className="mr-5 py-1 px-2 bg-green-500 hover:bg-green-800 text-white"
             >
               Add
             </button>
             <button
               onClick={() => this.props.closeModal()}
-              className=" py-1 px-2 bg-red-700 font-bold hover:bg-red-900 text-white"
+              className="py-1 px-2 bg-red-500 hover:bg-red-700 text-white"
             >
               Cancel
             </button>

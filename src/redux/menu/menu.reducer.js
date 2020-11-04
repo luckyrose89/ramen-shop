@@ -3,7 +3,6 @@ import MenuActionTypes from "./menu.types";
 const INITIAL_STATE = {
   isFetching: false,
   menuItems: null,
-  currentItem: null,
   errorMessage: undefined,
 };
 
@@ -25,11 +24,6 @@ const menuReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: false,
         errorMessage: action.payload,
-      };
-    case MenuActionTypes.GET_CURRENT_ITEM:
-      return {
-        ...state,
-        currentItem: action.payload,
       };
     default:
       return state;
