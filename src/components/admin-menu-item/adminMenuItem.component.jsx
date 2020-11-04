@@ -17,13 +17,13 @@ const AdminMenuItem = ({ item, handleEditButton, handleDeleteButton }) => {
         </div>
         <div className="px-6 pt-4 pb-4 mb-6">
           <button
-            onClick={() => handleEditButton()}
+            onClick={() => handleEditButton(item)}
             className="mr-4 px-2 py-1 bg-teal-500 text-white hover:bg-teal-700"
           >
             Edit
           </button>
           <button
-            onClick={() => handleDeleteButton()}
+            onClick={() => handleDeleteButton(item)}
             className="mr-4 px-2 py-1 bg-red-400 text-white hover:bg-red-700"
           >
             Delete

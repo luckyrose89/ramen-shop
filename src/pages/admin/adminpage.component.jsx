@@ -18,6 +18,7 @@ class AdminPage extends React.Component {
     this.state = {
       showDeletePopup: false,
       showEditPopup: false,
+      selectedItem: null,
     };
   }
   componentDidMount = () => {
@@ -31,13 +32,21 @@ class AdminPage extends React.Component {
     });
   };
 
-  handleDeleteButton = () => {
+  handleDeleteButton = (item) => {
     this.setState({
       showDeletePopup: true,
+      selectedItem: item,
     });
   };
 
-  deleteMenuItem = () => {};
+  deleteMenuItem = async () => {
+    const itemToDelete = this.state.selectedItem;
+    await deleteMenuItemDocument(itemToDelete.id);
+    this.setState({
+      selectedItem: null,
+    });
+    this.props.getMenuItems();
+  };
 
   closeModal = () => {
     this.setState({
@@ -73,7 +82,10 @@ class AdminPage extends React.Component {
         </div>
         {showDeletePopup ? (
           <ModalBackground>
-            <DeletePopup closeModal={this.closeModal} />
+            <DeletePopup
+              closeModal={this.closeModal}
+              deleteMenuItem={this.deleteMenuItem}
+            />
           </ModalBackground>
         ) : null}
         {showEditPopup ? (

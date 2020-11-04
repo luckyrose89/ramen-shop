@@ -1,6 +1,8 @@
 import React from "react";
 import FormInputTwo from "../form-input-v2/formInputTwo.component";
+import { connect } from "react-redux";
 
+import { getMenuItems } from "../../redux/menu/menu.actions";
 import { addMenuItemDocument } from "../../firebase/firebase.utils";
 
 class AddItem extends React.Component {
@@ -34,6 +36,7 @@ class AddItem extends React.Component {
         imageURL: "",
         category: "appetizers",
       });
+      this.props.getMenuItems();
     } catch (error) {
       console.log(error);
     }
@@ -107,4 +110,8 @@ class AddItem extends React.Component {
   }
 }
 
-export default AddItem;
+const mapDispatchToProps = (dispatch) => ({
+  getMenuItems: () => dispatch(getMenuItems()),
+});
+
+export default connect(null, mapDispatchToProps)(AddItem);
