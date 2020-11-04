@@ -94,6 +94,13 @@ export const addMenuItemDocument = async (data) => {
 // update menu item
 
 // delete a menu item
+export const deleteMenuItemDocument = async (itemId) => {
+  try {
+    await firestore.collection("menu-items").doc(itemId).delete();
+  } catch (error) {
+    console.log("Error Deleteing item from collection ", error.message);
+  }
+};
 
 // Initialize App
 firebase.initializeApp(config);

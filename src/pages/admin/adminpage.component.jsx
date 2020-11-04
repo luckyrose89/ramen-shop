@@ -4,11 +4,13 @@ import { createStructuredSelector } from "reselect";
 
 import { getMenuItems } from "../../redux/menu/menu.actions";
 import { selectMenuItems } from "../../redux/menu/menu.selectors";
+import { deleteMenuItemDocument } from "../../firebase/firebase.utils";
 
 import AddItem from "../../components/add-item/addItem.component";
 import AdminMenuItem from "../../components/admin-menu-item/adminMenuItem.component";
 import ModalBackground from "../../components/modal-background/modalBackground.component";
 import DeletePopup from "../../components/delete-popup/deletePopup.component";
+import EditPopup from "../../components/edit-popup/editPopup.component";
 
 class AdminPage extends React.Component {
   constructor(props) {
@@ -24,7 +26,9 @@ class AdminPage extends React.Component {
   };
 
   handleEditButton = () => {
-    alert("I clicked edit!");
+    this.setState({
+      showEditPopup: true,
+    });
   };
 
   handleDeleteButton = () => {
@@ -32,6 +36,8 @@ class AdminPage extends React.Component {
       showDeletePopup: true,
     });
   };
+
+  deleteMenuItem = () => {};
 
   closeModal = () => {
     this.setState({
@@ -68,6 +74,11 @@ class AdminPage extends React.Component {
         {showDeletePopup ? (
           <ModalBackground>
             <DeletePopup closeModal={this.closeModal} />
+          </ModalBackground>
+        ) : null}
+        {showEditPopup ? (
+          <ModalBackground>
+            <EditPopup closeModal={this.closeModal} />
           </ModalBackground>
         ) : null}
       </div>
