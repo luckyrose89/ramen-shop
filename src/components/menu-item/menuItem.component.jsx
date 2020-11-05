@@ -6,7 +6,7 @@ import { addItemToCart } from "../../redux/cart/cart.actions";
 const MenuItem = ({ item, addItem }) => {
   const { name, price, description, imageURL } = item;
   return (
-    <div className="flex justify-between md:w-2/3 mb-8 sm:mb-4 py-2 sm:py-0 cursor-pointer">
+    <div className="flex transform justify-between md:w-2/3 my-12 sm:mb-4 py-2 sm:py-0 cursor-pointer shadow-lg hover:scale-105">
       <div className="px-3 py-2 w-2/3">
         <h4 className="pb-2">{name}</h4>
         <div className="text-xs md:text-base pb-2">${price.toFixed(2)}</div>
@@ -23,7 +23,7 @@ const MenuItem = ({ item, addItem }) => {
         style={{ backgroundImage: `url(${imageURL})` }}
       >
         <button
-          className="absolute sm:hidden px-3 py-2 bg-green-600 hover:bg-green-800 text-white text-sm focus:outline-none"
+          className="absolute sm:hidden px-3 py-2 text-white text-sm bg-green-600 hover:bg-green-800 focus:outline-none"
           onClick={() => addItem(item)}
         >
           Add
