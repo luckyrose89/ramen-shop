@@ -25,8 +25,7 @@ class AddItem extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const data = this.state;
-    console.log(data);
-    data.price = parseInt(data.price);
+    data.price = parseFloat(data.price);
     try {
       await addMenuItemDocument(data);
       this.setState({

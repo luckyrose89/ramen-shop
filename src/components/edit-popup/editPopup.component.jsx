@@ -5,11 +5,11 @@ class EditPopup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      price: "",
-      description: "",
-      imageURL: "",
-      category: "appetizers",
+      name: this.props.item.name,
+      price: this.props.item.price,
+      description: this.props.item.description,
+      imageURL: this.props.item.imageURL,
+      category: this.props.item.category,
     };
   }
 
@@ -20,6 +20,10 @@ class EditPopup extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const data = this.state;
+    data.price = parseFloat(data.price);
+
+    this.props.editMenuItem(data);
   };
 
   render() {
@@ -38,7 +42,7 @@ class EditPopup extends React.Component {
             </div>
             <div className="w-full sm:w-1/2 mr-2">
               <FormInputTwo
-                type="number"
+                type="text"
                 name="price"
                 label="Price"
                 value={this.state.price}

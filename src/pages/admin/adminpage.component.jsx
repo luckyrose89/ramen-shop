@@ -4,7 +4,10 @@ import { createStructuredSelector } from "reselect";
 
 import { getMenuItems } from "../../redux/menu/menu.actions";
 import { selectMenuItems } from "../../redux/menu/menu.selectors";
-import { deleteMenuItemDocument } from "../../firebase/firebase.utils";
+import {
+  deleteMenuItemDocument,
+  updateMenuItemDocument,
+} from "../../firebase/firebase.utils";
 
 import AddItem from "../../components/add-item/addItem.component";
 import AdminMenuItem from "../../components/admin-menu-item/adminMenuItem.component";
@@ -26,9 +29,10 @@ class AdminPage extends React.Component {
     this.props.getMenuItems();
   };
 
-  handleEditButton = () => {
+  handleEditButton = (item) => {
     this.setState({
       showEditPopup: true,
+      selectedItem: item,
     });
   };
 
@@ -45,6 +49,16 @@ class AdminPage extends React.Component {
     this.setState({
       selectedItem: null,
     });
+    this.props.getMenuItems();
+  };
+
+  editMenuItem = async (data) => {
+    const itemToUpdate = this.state.selectedItem;
+    await updateMenuItemDocument(itemToUpdate.id, data);
+    this.setState({
+      selectedItem: null,
+    });
+    this.closeModal();
     this.props.getMenuItems();
   };
 
@@ -90,7 +104,11 @@ class AdminPage extends React.Component {
         ) : null}
         {showEditPopup ? (
           <ModalBackground>
-            <EditPopup closeModal={this.closeModal} />
+            <EditPopup
+              closeModal={this.closeModal}
+              item={this.state.selectedItem}
+              editMenuItem={this.editMenuItem}
+            />
           </ModalBackground>
         ) : null}
       </div>
