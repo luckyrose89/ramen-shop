@@ -8,6 +8,7 @@ import CartIcon from "../cart-icon/cartIcon.component";
 import AccountDropdown from "../account-dropdown/accountDropdown.component";
 import CartDropdown from "../cart-dropdown/cartDropdown.component";
 
+
 class Header extends React.Component {
   render() {
     return (
@@ -33,6 +34,7 @@ class Header extends React.Component {
             />
           </svg>
         </div>
+
         <div className="hidden sm:block text-white">
           {this.props.currentUser ? (
             <AccountDropdown />

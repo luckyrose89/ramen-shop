@@ -25,17 +25,17 @@ class App extends React.Component {
     const { setCurrentUser, adminModeOn } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
-        const idClaim = await auth.currentUser.getIdTokenResult();
-        if (idClaim.claims.admin) {
-          adminModeOn();
-        }
         const userRef = await createUserProfileDocument(userAuth);
+        const idClaim = await auth.currentUser.getIdTokenResult();
         userRef.onSnapshot((snapShot) => {
           setCurrentUser({
             id: snapShot.id,
             ...snapShot.data(),
           });
         });
+        if (idClaim.claims.admin) {
+          adminModeOn();
+        }
       }
       setCurrentUser(userAuth);
     });
