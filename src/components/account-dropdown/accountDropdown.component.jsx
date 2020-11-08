@@ -8,7 +8,6 @@ import {
   selectUserDropdown,
   selectAdminMode,
 } from "../../redux/user/user.selectors";
-import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { toggleUserOptions, adminModeOff } from "../../redux/user/user.actions";
 
 class AccountDropdown extends React.Component {
@@ -26,9 +25,7 @@ class AccountDropdown extends React.Component {
         <button
           className="px-3 hover:bg-gray-700 focus:outline-none"
           onClick={() => {
-            if (this.props.cartHidden) {
-              this.props.dispatch(toggleUserOptions());
-            }
+            this.props.dispatch(toggleUserOptions());
           }}
         >
           {this.props.currentUser.username} &#x2193;
@@ -72,7 +69,6 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   dropdownOpen: selectUserDropdown,
   adminMode: selectAdminMode,
-  cartHidden: selectCartHidden,
 });
 
 export default withRouter(connect(mapStateToProps)(AccountDropdown));

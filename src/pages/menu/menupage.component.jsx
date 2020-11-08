@@ -29,7 +29,7 @@ class MenuPage extends React.Component {
     const sushi = this.filterItemsByCategory("sushi", menuItems);
 
     return (
-      <div className="px-5 py-10 mt-20">
+      <div className="px-8 py-10 mt-20">
         <Category category={appetizers} />
         <Category category={noodles} />
         <Category category={sushi} />
