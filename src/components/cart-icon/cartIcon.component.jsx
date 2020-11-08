@@ -3,12 +3,24 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
 import { selectCartItemsCount } from "../../redux/cart/cart.selectors";
+import { toggleUserOptions } from "../../redux/user/user.actions";
+import { selectUserDropdown } from "../../redux/user/user.selectors";
 
-const CartIcon = ({ toggleCartHidden, itemCount }) => {
+const CartIcon = ({
+  toggleCartHidden,
+  toggleUserOptions,
+  itemCount,
+  userDropdown,
+}) => {
   return (
     <div
       className="inline-block relative px-3 align-bottom cursor-pointer"
-      onClick={toggleCartHidden}
+      onClick={() => {
+        if (!userDropdown) {
+          toggleUserOptions();
+        }
+        toggleCartHidden();
+      }}
     >
       <svg
         className="h-6 w-6 fill-current text-white"
@@ -25,10 +37,12 @@ const CartIcon = ({ toggleCartHidden, itemCount }) => {
 
 const mapStateToProps = createStructuredSelector({
   itemCount: selectCartItemsCount,
+  userDropdown: selectUserDropdown,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   toggleCartHidden: () => dispatch(toggleCartHidden()),
+  toggleUserOptions: () => dispatch(toggleUserOptions()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
