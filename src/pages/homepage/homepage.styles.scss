@@ -1,1 +1,17 @@
+.homepage {
+  background: url("../../assets/images/ramen-homepage.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: cover;
+  width: 100%;
+  height: 1024px;
+  position: relative;
 
+  .announcement {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
