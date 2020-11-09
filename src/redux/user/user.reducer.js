@@ -1,7 +1,6 @@
 import { UserActionTypes } from "./user.types";
 
 const INITIAL_STATE = {
-  hidden: true,
   userEditing: false,
   adminMode: false,
   currentUser: null,
@@ -9,11 +8,6 @@ const INITIAL_STATE = {
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UserActionTypes.TOGGLE_USER_OPTIONS:
-      return {
-        ...state,
-        hidden: !state.hidden,
-      };
     case UserActionTypes.SET_CURRENT_USER:
       return {
         ...state,

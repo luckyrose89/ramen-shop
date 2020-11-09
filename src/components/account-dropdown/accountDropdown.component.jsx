@@ -3,14 +3,35 @@ import { withRouter } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+
+import onClickOutside from "react-onclickoutside";
+
 import {
   selectCurrentUser,
-  selectUserDropdown,
   selectAdminMode,
 } from "../../redux/user/user.selectors";
-import { toggleUserOptions, adminModeOff } from "../../redux/user/user.actions";
+import { adminModeOff } from "../../redux/user/user.actions";
 
 class AccountDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+    };
+  }
+
+  handleToggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  };
+
+  handleClickOutside = () => {
+    this.setState({
+      isOpen: false,
+    });
+  };
+
   handleSignOut = () => {
     this.setState({ isOpen: false });
     auth.signOut();
@@ -24,19 +45,17 @@ class AccountDropdown extends React.Component {
       <div className="inline-block relative">
         <button
           className="px-3 hover:bg-gray-700 focus:outline-none"
-          onClick={() => {
-            this.props.dispatch(toggleUserOptions());
-          }}
+          onClick={this.handleToggle}
         >
           {this.props.currentUser.username} &#x2193;
         </button>
-        {!this.props.dropdownOpen ? (
+        {this.state.isOpen ? (
           <div className="absolute mt-2 w-32 py-2 bg-white shadow-md">
             <button
               className="px-4 py-2 block w-full text-left text-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none"
               onClick={() => {
                 this.props.history.push("/profile");
-                this.props.dispatch(toggleUserOptions());
+                this.handleToggle();
               }}
             >
               Profile
@@ -46,7 +65,7 @@ class AccountDropdown extends React.Component {
                 className="px-4 py-2 block w-full text-left text-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none"
                 onClick={() => {
                   this.props.history.push("/admin");
-                  this.props.dispatch(toggleUserOptions());
+                  this.handleToggle();
                 }}
               >
                 Manage
@@ -67,8 +86,9 @@ class AccountDropdown extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  dropdownOpen: selectUserDropdown,
   adminMode: selectAdminMode,
 });
 
-export default withRouter(connect(mapStateToProps)(AccountDropdown));
+export default withRouter(
+  connect(mapStateToProps)(onClickOutside(AccountDropdown))
+);
