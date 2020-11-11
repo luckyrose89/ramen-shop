@@ -30,7 +30,7 @@ class CartIcon extends React.Component {
   render() {
     return (
       <div
-        className="inline-block relative px-3 align-bottom cursor-pointer"
+        className="inline-block relative sm:px-3 align-bottom cursor-pointer"
         onClick={this.handleToggleCart}
       >
         <div>
