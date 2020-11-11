@@ -23,7 +23,7 @@ class MenuPage extends React.Component {
     const menuItems = this.props.menu;
     if (menuItems === null) {
       return (
-        <div className="px-5 py-10 mt-20">
+        <div className="mt-16">
           <LoadingScreen />
         </div>
       );
@@ -34,7 +34,7 @@ class MenuPage extends React.Component {
     const sushi = this.filterItemsByCategory("sushi", menuItems);
 
     return (
-      <div className="mt-16">
+      <div className="mt-16 px-10 py-10">
         <Category category={appetizers} />
         <Category category={noodles} />
         <Category category={sushi} />

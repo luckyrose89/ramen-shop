@@ -14,6 +14,7 @@ import AdminMenuItem from "../../components/admin-menu-item/adminMenuItem.compon
 import ModalBackground from "../../components/modal-background/modalBackground.component";
 import DeletePopup from "../../components/delete-popup/deletePopup.component";
 import EditPopup from "../../components/edit-popup/editPopup.component";
+import LoadingScreen from "../../components/loading-screen/loadingScreen.component";
 
 class AdminPage extends React.Component {
   constructor(props) {
@@ -73,7 +74,11 @@ class AdminPage extends React.Component {
     const menuItems = this.props.menu;
     const { showEditPopup, showDeletePopup } = this.state;
     if (menuItems === null) {
-      return <div className="px-5 py-10 mt-20">Loading...</div>;
+      return (
+        <div className="mt-16">
+          <LoadingScreen />
+        </div>
+      );
     }
 
     return (
