@@ -24,7 +24,9 @@ const MenuItem = ({ item, addItem }) => {
       >
         <button
           className="absolute sm:hidden px-3 py-2 text-white text-sm bg-green-600 hover:bg-green-800 focus:outline-none"
-          onClick={() => addItem(item)}
+          onClick={() => {
+            addItem(item);
+          }}
         >
           Add
         </button>

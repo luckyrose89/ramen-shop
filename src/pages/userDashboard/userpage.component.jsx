@@ -6,6 +6,7 @@ import { getOrderHistoryDocuments } from "../../firebase/firebase.utils";
 import UserInfoBox from "../../components/user-infoBox/userInfoBox.component";
 import OrderHistoryItem from "../../components/order-history-item/orderHistoryItem.component";
 import UserInfoEditForm from "../../components/userInfo-edit-form/userInfoEditForm.component";
+import LoadingScreen from "../../components/loading-screen/loadingScreen.component";
 
 class UserPage extends React.Component {
   constructor(props) {
@@ -43,6 +44,9 @@ class UserPage extends React.Component {
 
   render() {
     const orderHistoryItems = this.state.orderHistory;
+    if (orderHistoryItems.length === 0) {
+      return <LoadingScreen />;
+    }
     return (
       <div className="max-w-2xl mx-auto my-20 px-5 py-10">
         {this.state.userEditingMode ? (
@@ -53,13 +57,9 @@ class UserPage extends React.Component {
         <p className="px-8 my-8 font-bold text-gray-800 sm:text-md">
           My Recent Orders
         </p>
-        {orderHistoryItems.length === 0 ? (
-          <div className="px-8 my-8 text-center">Order History Unavailable</div>
-        ) : (
-          orderHistoryItems.map((item) => (
-            <OrderHistoryItem key={item.id} item={item} />
-          ))
-        )}
+        {orderHistoryItems.map((item) => (
+          <OrderHistoryItem key={item.id} item={item} />
+        ))}
       </div>
     );
   }
