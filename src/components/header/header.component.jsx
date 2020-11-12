@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+
+import onClickOutside from "react-onclickoutside";
+
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import CartIcon from "../cart-icon/cartIcon.component";
 import AccountDropdown from "../account-dropdown/accountDropdown.component";
@@ -21,11 +24,17 @@ class Header extends React.Component {
     });
   };
 
+  handleClickOutside = () => {
+    this.setState({
+      isOpen: false,
+    });
+  };
+
   render() {
     return (
       <header className="fixed top-0 left-0 flex justify-between items-center w-full h-16 z-10 bg-gray-900 py-2 px-10 sm:py-4">
         <div>
-          <Link to="/">
+          <Link to="/" onClick={this.handleClickOutside}>
             <h1 className="text-white">Ramen Shop</h1>
           </Link>
         </div>
@@ -47,7 +56,9 @@ class Header extends React.Component {
             </svg>
           </button>
         </div>
-        {this.state.isOpen ? <MobileDropdown /> : null}
+        {this.state.isOpen ? (
+          <MobileDropdown handleToggle={this.handleToggle} />
+        ) : null}
         <div className="hidden sm:block text-white">
           {this.props.currentUser ? (
             <AccountDropdown />
@@ -70,4 +81,4 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(onClickOutside(Header));
