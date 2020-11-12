@@ -4,7 +4,6 @@ import { createStructuredSelector } from "reselect";
 
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { updateUserDocument } from "../../firebase/firebase.utils";
-import { userEditMode } from "../../redux/user/user.actions";
 
 import FormInputTwo from "../form-input-v2/formInputTwo.component";
 
@@ -35,7 +34,7 @@ class UserInfoEditForm extends React.Component {
         error: error.code,
       });
     }
-    this.props.dispatch(userEditMode());
+    this.props.handleCancelEdit();
   };
 
   render() {
@@ -83,12 +82,20 @@ class UserInfoEditForm extends React.Component {
             value={this.state.address}
             handleChange={this.handleChange}
           />
-          <button
-            type="submit"
-            className="absolute top-0 right-0 mt-5 mr-5 py-1 px-2 text-green-800 font-bold hover:bg-green-800 hover:text-white"
-          >
-            Done
-          </button>
+          <div className="absolute top-0 right-0 mt-5 mr-5 ">
+            <button
+              type="submit"
+              className="py-1 px-2 text-green-800 font-bold hover:bg-green-800 hover:text-white"
+            >
+              Done
+            </button>
+            <button
+              onClick={this.props.handleCancelEdit}
+              className="py-1 px-2 text-red-600 font-bold hover:bg-red-800 hover:text-white"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     );

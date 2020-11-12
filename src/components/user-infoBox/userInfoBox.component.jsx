@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import { selectCurrentUser } from "../../redux/user/user.selectors";
-import { userEditMode } from "../../redux/user/user.actions";
 
-const UserInfoBox = ({ currentUser, dispatch }) => {
+const UserInfoBox = ({ currentUser, handleToggle }) => {
   return (
     <div className="relative max-w-xl mx-auto shadow-lg h-auto w-full py-8 px-8 text-sm sm:text-base">
       <h2 className="text-lg font-bold text-gray-800">My Account</h2>
@@ -22,9 +21,7 @@ const UserInfoBox = ({ currentUser, dispatch }) => {
         {currentUser.address}
       </div>
       <button
-        onClick={() => {
-          dispatch(userEditMode());
-        }}
+        onClick={handleToggle}
         className=" absolute top-0 right-0 mt-5 mr-5 my-2 py-1 px-2 text-green-800 font-bold"
       >
         EDIT

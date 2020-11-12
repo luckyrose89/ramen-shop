@@ -47,7 +47,7 @@ class MobileDropdown extends React.Component {
                   onClick={this.handleUserOptions}
                   className="block w-full text-left focus:outline-none"
                 >
-                  {this.props.currentUser.username} &#x2193;
+                  {this.props.currentUser.username} 🖱
                 </button>
               </div>
               {this.state.isOpen ? (

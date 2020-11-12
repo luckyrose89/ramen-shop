@@ -1,7 +1,6 @@
 import { UserActionTypes } from "./user.types";
 
 const INITIAL_STATE = {
-  userEditing: false,
   adminMode: false,
   currentUser: null,
 };
@@ -12,11 +11,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
-      };
-    case UserActionTypes.USER_EDITING_SELF_INFO:
-      return {
-        ...state,
-        userEditing: !state.userEditing,
       };
     case UserActionTypes.ADMIN_MODE_ON:
       return {

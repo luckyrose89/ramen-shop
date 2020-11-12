@@ -1,10 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import {
-  selectCurrentUser,
-  selectUserInfoEditForm,
-} from "../../redux/user/user.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { getOrderHistoryDocuments } from "../../firebase/firebase.utils";
 import UserInfoBox from "../../components/user-infoBox/userInfoBox.component";
 import OrderHistoryItem from "../../components/order-history-item/orderHistoryItem.component";
@@ -15,8 +12,21 @@ class UserPage extends React.Component {
     super(props);
     this.state = {
       orderHistory: [],
+      userEditingMode: false,
     };
   }
+
+  handleToggle = () => {
+    this.setState({
+      userEditingMode: !this.state.userEditingMode,
+    });
+  };
+
+  handleCancelEdit = () => {
+    this.setState({
+      userEditingMode: false,
+    });
+  };
 
   componentDidMount = async () => {
     document.title = "Ramen Shop - User Page";
@@ -35,10 +45,10 @@ class UserPage extends React.Component {
     const orderHistoryItems = this.state.orderHistory;
     return (
       <div className="max-w-2xl mx-auto my-20 px-5 py-10">
-        {this.props.currentUserEditingInfo ? (
-          <UserInfoEditForm />
+        {this.state.userEditingMode ? (
+          <UserInfoEditForm handleCancelEdit={this.handleCancelEdit} />
         ) : (
-          <UserInfoBox />
+          <UserInfoBox handleToggle={this.handleToggle} />
         )}
         <p className="px-8 my-8 font-bold text-gray-800 sm:text-md">
           My Recent Orders
@@ -57,7 +67,6 @@ class UserPage extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  currentUserEditingInfo: selectUserInfoEditForm,
 });
 
 export default connect(mapStateToProps)(UserPage);
