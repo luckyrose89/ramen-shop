@@ -17,6 +17,7 @@ import Header from "./components/header/header.component";
 import SignupPage from "./pages/loginSignup/signup.component";
 import UserPage from "./pages/userDashboard/userpage.component";
 import AdminPage from "./pages/admin/adminpage.component";
+import ErrorPage from "./pages/error-page/errorPage.component";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -51,7 +52,7 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/menu" component={MenuPage} />
+          <Route exact path="/menu" component={MenuPage} />
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
@@ -81,6 +82,7 @@ class App extends React.Component {
               this.props.adminMode ? <AdminPage /> : <Redirect to="/" />
             }
           />
+          <Route component={ErrorPage} />
         </Switch>
       </div>
     );
