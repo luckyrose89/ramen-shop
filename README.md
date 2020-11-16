@@ -29,6 +29,7 @@ Once you've cloned the project, open it in your command prompt or git bash run `
 Open the server/functions folder from the root of the project folder and repeat the installation command to install server dependencies if you wish to run the project server locally.
 
 To open the app in your browser, visit the root of the project and from there type `npm start`. This command will open the project on localhost:3000 port on your machine.
+
 ![Ramen shop on localhost:3000](https://i.ibb.co/FJ702YR/preview.gif)
 
 The server can be started by visiting the server/functions folder from the root of the project. Once there, type `firebase serve`. This will open the server on port 5000.
